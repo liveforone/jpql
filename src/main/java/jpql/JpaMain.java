@@ -30,13 +30,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select function('group_concat', m.username) From Member m";
-
-            List<String> result = em.createQuery(query, String.class)
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
                     .getResultList();
 
-            for (String s : result) {
-                System.out.println("s = " + s);
+            for (Member member : resultList) {
+                System.out.println("member = " + member);
             }
 
 
